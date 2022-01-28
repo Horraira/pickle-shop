@@ -26,7 +26,7 @@ class Product(models.Model):
     old_price = models.FloatField(default=0.00)
     created = models.DateTimeField(auto_now_add=True)
 
-    def __Str__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
