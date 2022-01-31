@@ -18,6 +18,33 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="card" style="height: auto">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for order_item in order_items %}
+                        <li class="list-group-item">
+                            {{ order_item.item.name }} * {{ order_item.quantity }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <div class="float-left">
+                        <b>Order Total</b>
+                        <span class="float-right"><b>&#2547; {{order_total|floatformat:2}} </b></span>
+                    </div>
+                </div>
+            </div>
+            <br> <br>
+            {% if saved_address.is_fully_filled %}
+            <a href="{% url 'Payment_App:payment' %}" class="btn btn-warning btn-md">Make Payment</a>
+            {% else %}
+            <div class="alert alert-info">
+                <p>Please fill up all the information to make payment.</p>
+            </div>
+            {% endif %}
+        </div>
     </div>
 </div>
 
