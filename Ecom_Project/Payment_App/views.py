@@ -103,3 +103,18 @@ def purchase(request, val_id, tran_id):
         item.purchased = True
         item.save()
     return HttpResponseRedirect(reverse("Shop_App:home"))
+
+
+@login_required
+def order_view(request):
+    try:
+        orders = Order.objects.filter(user=request.user, ordered=True)
+        context = {"orders": orders}
+    except:
+        messages.warning(request, "You do not have an active order.")
+        return redirect("Shop_App:home")
+    return render(request, "Payment_App/order.html", context)
+
+
+
+
